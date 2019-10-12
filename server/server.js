@@ -73,7 +73,7 @@ const imgbuf = Buffer.from(imgdata)
 server.get('/tracker/:userId.gif', (req, res) => {
   const { userId } = req.params
   // <img src={`/tracker/${counter}.gif`} alt="tracker" />
-  // '/tracker' 
+  // '/tracker'
   const dataObj = {
     language: req.headers['accept-language'],
     userAgent: req.headers['user-agent'],
