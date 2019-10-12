@@ -64,11 +64,36 @@ const getFakeUser = () => {
   }
 }
 
-// add faker
-// comment /api/ route
-// add new route /api/users
-// return 10 users, each has 8 fields
-
+const imgdata = [
+  0x47, 0x49, 0x46, 0x38, 0x39, 0x61, 0x01, 0x00, 0x01, 0x00, 0x80, 0x00, 0x00, 0xFF, 0xFF, 0xFF,
+  0x00, 0x00, 0x00, 0x21, 0xf9, 0x04, 0x04, 0x00, 0x00, 0x00, 0x00, 0x2c, 0x00, 0x00, 0x00, 0x00,
+  0x01, 0x00, 0x01, 0x00, 0x00, 0x02, 0x02, 0x44, 0x01, 0x00, 0x3b
+]
+const imgbuf = Buffer.from(imgdata)
+server.get('/tracker/:userId.gif', (req, res) => {
+  const { userId } = req.params
+  // <img src={`/tracker/${counter}.gif`} alt="tracker" />
+  // '/tracker' 
+  const dataObj = {
+    language: req.headers['accept-language'],
+    userAgent: req.headers['user-agent'],
+    date: +(new Date()),
+    ipAddress: req.connection.remoteAddress,
+    userId
+  }
+  const fileName = `${__dirname}/logs/${userId}_${dataObj.date}.json`;
+  return fs.writeFile(
+    fileName,
+    JSON.stringify(dataObj),
+    () => {
+      res.writeHead(200, {
+        'Content-Type': 'image/gif',
+        'Content-Length': imgdata.length,
+      })
+      res.end(imgbuf)
+    }
+  )
+})
 
 server.get('/api/users', (req, res) => {
   const fileName = `${__dirname}/tmp/data.json`;

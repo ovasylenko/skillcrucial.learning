@@ -5,11 +5,12 @@ import { bindActionCreators } from 'redux'
 import Head from './head'
 
 const Dummy = () => {
-  const [counter] = useState(0)
+  const [counter] = useState(4)
   return (
     <div>
       <Head title="Hello" />
       <div> Hello World {counter} </div>
+      <img src={`/tracker/${counter}.gif`} alt="tracker" />
     </div>
   )
 }
