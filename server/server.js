@@ -1,13 +1,15 @@
 /* eslint-disable import/no-duplicates */
-import express from 'express';
-import path from 'path';
+import express from 'express'
+import path from 'path'
+import fs from 'fs'
+
 import cors from 'cors'
-import bodyParser from 'body-parser';
-import sockjs from 'sockjs';
-import faker from 'faker';
+import bodyParser from 'body-parser'
+import sockjs from 'sockjs'
+import faker from 'faker'
 import cookieParser from 'cookie-parser'
-import Html from '../client/html';
-import Variables from '../client/variables';
+import Html from '../client/html'
+import Variables from '../client/variables'
 
 
 let connections = [];
@@ -62,9 +64,33 @@ const getFakeUser = () => {
   }
 }
 
+// add faker
+// comment /api/ route
+// add new route /api/users
+// return 10 users, each has 8 fields
+
+
 server.get('/api/users', (req, res) => {
-  res.json(
-    new Array(10).fill(null).map(getFakeUser)
+  const fileName = `${__dirname}/tmp/data.json`;
+  fs.readFile(
+    fileName,
+    (err, data) => {
+      if (!err) {
+        return res.json(
+          JSON.parse(data)
+        )
+      }
+      const dataGenerated = new Array(100).fill(null).map(getFakeUser);
+      return fs.writeFile(
+        fileName,
+        JSON.stringify(dataGenerated),
+        () => {
+          res.json(
+            dataGenerated
+          )
+        }
+      )
+    }
   )
 })
 
