@@ -4,7 +4,7 @@ import path from 'path';
 import cors from 'cors'
 import bodyParser from 'body-parser';
 import sockjs from 'sockjs';
-
+import faker from 'faker';
 import cookieParser from 'cookie-parser'
 import Html from '../client/html';
 import Variables from '../client/variables';
@@ -20,17 +20,17 @@ const port = process.env.PORT || 3000;
 const server = express();
 
 server.use(cors());
-
+// middleware
 server.use(express.static(path.resolve(__dirname, '../dist/assets')));
 server.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }))
 server.use(bodyParser.json({ limit: '50mb', extended: true }))
 
 server.use(cookieParser());
 
-server.use('/api/', (req, res) => {
-  res.status(404);
-  res.end();
-});
+// server.use('/api/', (req, res) => {
+//   res.status(404);
+//   res.end();
+// });
 
 const echo = sockjs.createServer();
 echo.on('connection', (conn) => {
@@ -44,12 +44,29 @@ echo.on('connection', (conn) => {
 
 
 server.get('/js/variables.js', (req, res) => {
+  console.log('I am here')
   res.send(
     Variables({
       clientVariables
     })
   );
 });
+
+const getFakeUser = () => {
+  return {
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    company: faker.company.companyName(),
+    salary: faker.finance.amount(),
+    age: (faker.random.number() % 30) + 18
+  }
+}
+
+server.get('/api/users', (req, res) => {
+  res.json(
+    new Array(10).fill(null).map(getFakeUser)
+  )
+})
 
 server.get('/', (req, res) => {
   // const body = renderToString(<Root />);
