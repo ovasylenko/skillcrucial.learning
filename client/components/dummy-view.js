@@ -14,6 +14,7 @@ const Dummy = (props) => {
   return (
     <div>
       <Head title="Hello" />
+      <div> {JSON.stringify(props.isRequesting)} </div>
       <div> Hello World {counter} </div>
       <div> {JSON.stringify(props.users)} </div>
       <img src={`/tracker/${counter}.gif`} alt="tracker" />
@@ -24,7 +25,8 @@ const Dummy = (props) => {
 Dummy.propTypes = {}
 
 const mapStateToProps = state => ({
-  users: state.users.list
+  users: state.users.list,
+  isRequesting: state.users.isRequesting
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
