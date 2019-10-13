@@ -13,10 +13,34 @@ const Dummy = (props) => {
   }, [getDataProps])
   return (
     <div>
+      {/* name: faker.name.findName(),
+      email: faker.internet.email(),
+      company: faker.company.companyName(),
+      salary: faker.finance.amount(),
+      age: (faker.random.number() % 30) + 18 */}
       <Head title="Hello" />
-      <div> {JSON.stringify(props.isRequesting)} </div>
+      <div> {props.isRequesting ? 'Your data is loading' : ''} </div>
       <div> Hello World {counter} </div>
-      <div> {JSON.stringify(props.users)} </div>
+      <table>
+        <tr>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Company</td>
+          <td>Salary</td>
+          <td>Age</td>
+        </tr>
+        {
+          props.users.map(user => (
+            <tr>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.company}</td>
+              <td>{user.salary}</td>
+              <td>{user.age}</td>
+            </tr>
+          ))
+        }
+      </table>
       <img src={`/tracker/${counter}.gif`} alt="tracker" />
     </div>
   )

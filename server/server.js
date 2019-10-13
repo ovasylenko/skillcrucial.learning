@@ -101,18 +101,22 @@ server.get('/api/users', (req, res) => {
     fileName,
     (err, data) => {
       if (!err) {
-        return res.json(
-          JSON.parse(data)
-        )
+        setTimeout(() => {
+          return res.json(
+            JSON.parse(data).slice(0, 10)
+          )
+        }, 500)
       }
       const dataGenerated = new Array(100).fill(null).map(getFakeUser);
       return fs.writeFile(
         fileName,
         JSON.stringify(dataGenerated),
         () => {
-          res.json(
-            dataGenerated
-          )
+          setTimeout(() => {
+            return res.json(
+              dataGenerated.slice(0, 10)
+            )
+          }, 500)
         }
       )
     }
