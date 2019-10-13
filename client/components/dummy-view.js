@@ -27,6 +27,8 @@ const mapStateToProps = state => ({
   users: state.users.list
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getData }, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getData
+}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dummy)

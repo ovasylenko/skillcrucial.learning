@@ -1,7 +1,7 @@
 const GET_DATA = 'skillcrucial/users/GET_DATA'
 
 const initialState = {
-  list: [{ name: 'test' }]
+  list: []
 }
 
 export default (state = initialState, action) => {
@@ -20,7 +20,7 @@ export function getData() {
   return (dispatch) => {
     dispatch({
       type: GET_DATA,
-      list: [{ name: +(new Date())
-    }] })
+      list: [{ name: +(new Date()) }]
+    })
   }
 }
