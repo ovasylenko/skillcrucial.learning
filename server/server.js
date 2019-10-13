@@ -11,6 +11,7 @@ import cookieParser from 'cookie-parser'
 import Html from '../client/html'
 import Variables from '../client/variables'
 
+const PAGE_SIZE = 10
 
 let connections = [];
 const clientVariables = Object.keys(process.env)
@@ -94,8 +95,9 @@ server.get('/tracker/:userId.gif', (req, res) => {
     }
   )
 })
+server.get('/api/users/:pageIndex', (req, res) => {
+  const { pageIndex } = req.params
 
-server.get('/api/users', (req, res) => {
   const fileName = `${__dirname}/tmp/data.json`;
   fs.readFile(
     fileName,
@@ -103,7 +105,10 @@ server.get('/api/users', (req, res) => {
       if (!err) {
         setTimeout(() => {
           return res.json(
-            JSON.parse(data).slice(0, 10)
+            JSON.parse(data).slice(
+              +pageIndex * PAGE_SIZE,
+              (+pageIndex + 1) * PAGE_SIZE
+            )
           )
         }, 500)
       }
@@ -114,7 +119,10 @@ server.get('/api/users', (req, res) => {
         () => {
           setTimeout(() => {
             return res.json(
-              dataGenerated.slice(0, 10)
+              dataGenerated.slice(
+                +pageIndex * PAGE_SIZE,
+                (+pageIndex + 1) * PAGE_SIZE
+              )
             )
           }, 500)
         }
