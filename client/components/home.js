@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -8,6 +9,7 @@ const Home = () => {
   const [counter] = useState(0)
   return (
     <div>
+      <Link to="/">Go to Home</Link>
       <Head title="Hello" />
       <div> Hello World {counter} </div>
     </div>
