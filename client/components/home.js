@@ -9,7 +9,7 @@ const Home = () => {
   const [counter] = useState(0)
   return (
     <div>
-      <Link to="/">Go to Home</Link>
+      <Link to="/">&lArr;</Link>
       <Head title="Hello" />
       <div> Hello World {counter} </div>
     </div>

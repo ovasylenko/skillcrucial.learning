@@ -10,6 +10,11 @@ const Dummy = () => {
   const [counter] = useState(0)
   return (
     <div>
+      <span>Aren&acute;t me</span>
+      <br />
+      <span>In water solt - 100&permil;</span>
+      <br />
+
       <Link to="/dashboard">Go to dashboard</Link>
       <Head title="Hello" />
       <div> Hello World {counter + 1}</div>
