@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {} from 'universal-cookie';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux'
@@ -8,8 +9,22 @@ import { getData } from '../redux/reducers/users'
 
 const Dummy = () => {
   const [counter] = useState(0)
+  const [text, setText] = useState('')
+  const changeTextBox = () => {
+    setText('my new text')
+  }
+  const data = localStorage.setItem('my-text', JSON.stringify({ data: 'mypass' }))
   return (
     <div>
+      Enter your login
+      <br />
+      <input type="text" value={text} onChange={changeTextBox} />
+      <br />
+      !!!!!{text}!!!!
+      <br />
+      <input type="password" onChange={data} />
+      <br />
+
       <span>Aren&acute;t me</span>
       <br />
       <span>In water solt - 100&permil;</span>
