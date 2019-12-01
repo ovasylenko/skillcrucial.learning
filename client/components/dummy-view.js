@@ -13,29 +13,61 @@ const Dummy = () => {
     text1: true,
     text2: false
   })
+  const [text, setText] = useState('')
+  const [clickLog, clickLogChange] = useState('')
+  const [clickLog2, clickLog2Change] = useState('')
+
+  // e.preventDefault();
+  // e.stopPropagation();
+
   const toggle = () => {
     AnyText({
       text1: !showText.text1,
       text2: !showText.text2
     })
   }
-  const [text, setText] = useState('')
-  const changeTextBox = () => {
-    setText('my new text')
+  const changeTextBox = (e) => {
+    setText(e.target.value)
+    sessionStorage.setItem('password', text)
   }
-  const data = sessionStorage.setItem('my-text', JSON.stringify({ data: 'alex' }))
   return (
     <div>
+      <div
+        onClick={() => {
+          clickLogChange(`parentDivClick ${clickLog}`)
+        }}
+        role="button"
+        tabIndex={0}
+        onKeyDown={() => {}}
+      >
+        Click Me
+        <div
+          onClick={(e) => {
+            e.stopPropagation()
+            clickLog2Change(`myInnerDivClicked ${clickLog2}`)
+          }}
+          role="button"
+          tabIndex={0}
+          onKeyDown={() => {}}
+        >
+          Click Me2 Gently
+        </div>
+      </div>
+      { clickLog2 }
+      <br />
+
+      { clickLog }
+      <br />
       <input type="checkbox" />
       <input type="radio" />
       <br />
       Enter your login
       <br />
-      <input type="text" value={text} onChange={changeTextBox} />
+      <input type="text" onChange={changeTextBox} />
       <br />
-      !!!!!{text}!!!!
+      !!!!!password!!!!
       <br />
-      <input type="password" onChange={data} />
+      <input type="password" onChange={changeTextBox} />
       <br />
 
       {
