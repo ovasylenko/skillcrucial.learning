@@ -29,7 +29,14 @@ const Home = () => {
   }
   return (
     <div>
-      <Link to="/images/img1.jpg">image</Link>
+      {/* <img src="../images/img1.jpg" alt="" /> */}
+      <img
+        src="../images/img2.jpg"
+        alt=""
+        width="100"
+        heigth="500"
+      />
+      <br />
       <span>Enter your login:</span>
       <br />
 
