@@ -32,6 +32,9 @@ const Dummy = () => {
   }
   return (
     <div>
+      <img src="../images/img1.jpg" alt="" />
+      <br />
+
       <Link to="/flex">To Flex</Link>
       <div
         onClick={() => {
