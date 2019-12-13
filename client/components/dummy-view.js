@@ -32,6 +32,7 @@ const Dummy = () => {
   }
   return (
     <div>
+      <Link to="/flex">To Flex</Link>
       <div
         onClick={() => {
           clickLogChange(`parentDivClick ${clickLog}`)

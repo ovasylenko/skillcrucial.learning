@@ -29,7 +29,6 @@ const Home = () => {
   }
   return (
     <div>
-      {/* <img src="../images/img1.jpg" alt="" /> */}
       <img
         src="../images/img2.jpg"
         alt=""
